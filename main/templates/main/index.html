@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poseidon Park - Аквапарк</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+
+</head>
+<body>
+    {% include 'main/header.html' %}
+
+    <div class="container">
+        <div class="info-block">
+            <div class="info-text">
+                <h2>Секция о доверии компании</h2>
+                <p>Poseidon Park – это больше, чем просто аквапарк. Это целый мир водных приключений и радости, вдохновленный мифами и легендами древней Греции. Наш аквапарк носит имя древнегреческого бога морей и океанов Посейдона, который символизирует мощь воды и её неизмеримую красоту.</p>
+<p>Идея создания Poseidon Park родилась в 2010 году, когда группа энтузиастов, вдохновленных любовью к воде и древнегреческой мифологии, </p>
+<p>решила воплотить свою мечту в реальность. Они представляли место, где люди всех возрастов могли бы забыть о повседневных заботах и погрузиться в мир сказочных водных развлечений.
+В «Poseidon Park» каждый найдет развлечение и отдых по душе: спокойные бассейны, игровые аттракционы для самых маленьких и экстремальные горки для любителей адреналина, а также потрясающий банный комплекс.</p>
+<p>Прилив адреналина после посещения наших аттракционов зачастую вызывает зверский аппетит. Мы прекрасно об этом знаем и поэтому на территории аквазоны работают бары, где представлено самое разнообразное меню от легких закусок до полноценных горячих блюд.
+Мы знаем, как часто родители задают себе вопрос: как же устроить для своего ребенка незабываемый день рождения?  И ответ на этот вопрос очень прост: проведите этот праздник в аквапарке и благодарности ребенка не будет предела!</p>
+<p>Наша главная задача - сделать ваш отдых комфортным, безопасным и незабываемым! Доверьте ваш досуг профессионалам! «Poseidon Park» - сеть аквапарков №1 в России.         </p>
+            </div>
+            <div class="video">
+              <video width="800" autoplay muted loop controls>
+                    <source src="{{ video.video.url }}" width="230px" height="230px">
+                </video>
+            </div>
+        </div>
+
+        <div class="services-block">
+            <div class="services">
+                <h1>Услуги</h1>
+                {% for service in services %}
+                    <h3>{{ service.name }}</h3>
+                    <img src="{{ service.image.url }}" height="300px" width="400px">
+                    <p>{{ service.description }}</p>
+                    <p>{{ service.price }} руб.</p>
+                    <button onclick="window.location.href = '{% url 'main:create_visit' pk=service.pk model="service" %}'">Купить</button>
+                {% endfor %}
+            </div>
+            <div class="entertainment">
+                <h1>Развлечения</h1>
+                {% for entertainment in entertainments %}
+                    <h3>{{ entertainment.name }}</h3>
+                    <img src="{{ entertainment.image.url }}" height="300px" width="400px">
+                    <p>{{ entertainment.description }}</p>
+                    <p>{{ entertainment.duration }}</p>
+                    <button onclick="window.location.href = '{% url 'main:create_visit' pk=entertainment.pk model="entertainment" %}'">Купить</button>
+                {% endfor %}
+            </div>
+
+            <div class="entertainment">
+                <h1>Акции</h1>
+                {% for promotion in promotions %}
+                    <h3>{{ promotion.name }}</h3>
+                    <img src="{{ promotion.image.url }}" height="300px" width="400px">
+                    <p>{{ promotion.description }}</p>
+                    <p>{{ promotion.duration }}</p>
+                    <button onclick="window.location.href = '{% url 'main:create_visit' pk=promotion.pk model="promotion" %}'">Купить</button>
+                {% endfor %}
+            </div>
+
+            
+        </div>
+
+
+        <div class="articles">
+            <h2>Статьи</h2>
+            {% for post in posts %}
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.text }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include 'main/footer.html' %}
+</body>
+</html>
